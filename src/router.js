@@ -5,6 +5,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    name: 'loginPage',
+    component: () => import('@/views/LoginPage.vue'),
+  },
+  {
+    path: '/',
+    name: 'registerPage',
+    component: () => import('@/views/RegisterPage.vue'),
+  },
+  {
+    path: '/',
     name: 'beranda',
     component: () => import('@/components/DashboardLayout.vue'),
     children: [
@@ -63,7 +73,17 @@ const routes = [
           import('@/views/Ticket/updatePage.vue')
       }
     ]
-  }
+  },
+  {
+    path: '/',
+    name: 'landingPage',
+    component: () => import('@/views/HomePage.vue'),
+  },
+  {
+    path: '/',
+    name: 'detailTicket',
+    component: () => import('@/views/TicketPage.vue'),
+  },
 ]
 
 // create router
