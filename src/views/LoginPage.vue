@@ -17,7 +17,34 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios'
+import { onMounted, ref } from 'vue'
 
+export default {
+    setup(){
+        // reactive state
+        const customers = ref([])
+
+        // mounted
+        onMounted(() => {
+            // get API from Laravel Backend
+            axios.get('http://localhost:8000/api/customer')
+                .then(response => {
+                    // assign state posts with response data
+                    customers.value = response.data.data
+                }).catch(error => {
+                    console.log(error.response.data)
+                })
+        })
+
+        const username = null
+        const password = null
+
+        return{
+            customers,
+            username,
+            password
+        }
+    }
 };
 </script>

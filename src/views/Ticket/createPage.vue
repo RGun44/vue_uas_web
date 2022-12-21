@@ -13,13 +13,28 @@
                                     ID Concert
                                 </label>
                                 <select v-model="ticket.concert_id" class="form-select">
-                                    <option selected disabled value="">Choose Band</option>
+                                    <option selected disabled value="">Choose Concert</option>
                                     <option v-for="(concert,id) in concerts" :value="concert.id" :key="id">{{ concert.id }} - {{
                                         concert.name }}</option>
                                 </select>
                                 <div v-if="validation.concert_id" class="mt-2 alert alert-danger">
                                     {{
                                     validation.concert_id[0]
+                                    }}
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">
+                                    ID User
+                                </label>
+                                <select v-model="ticket.user_id" class="form-select">
+                                    <option selected disabled value="">Choose User</option>
+                                    <option v-for="(user,id) in users" :value="user.id" :key="id">{{ user.id }} - {{
+                                        user.name }}</option>
+                                </select>
+                                <div v-if="validation.user_id" class="mt-2 alert alert-danger">
+                                    {{
+                                    validation.user_id[0]
                                     }}
                                 </div>
                             </div>
@@ -43,7 +58,12 @@
                                 <label class="form-label">
                                     Price
                                 </label>
-                                <input type="number" class="form-control" v-model="ticket.price" placeholder="Masukkan harga tiket">
+                                <select v-model="ticket.price" class="form-select">
+                                    <option selected disabled value="">Pilih Harga</option>
+                                    <option v-for="(harga,id) in harga" :value="harga.values" :key="id">
+                                        {{ harga.text }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">
@@ -80,6 +100,12 @@ export default {
         { id: 2, value: 'eksklusif', text: 'Eksklusif' },
     ]
 
+    const harga = [
+        { id: 0, value: '150000', text: 'Rp 150.000' },
+        { id: 1, value: '200000', text: 'Rp 200.000' },
+        { id: 2, value: '500000', text: 'Rp 300.000' },
+    ]
+
     let concerts = ref([])
 
     //mounted     
@@ -94,9 +120,24 @@ export default {
             })
     })
 
+    let users = ref([])
+
+    //mounted     
+    onMounted(() => {
+        //get API from Laravel Backend      
+        axios.get('http://localhost:8000/api/profile')
+            .then(response => {
+                //assign state posts with response data           
+                users.value = response.data.data
+            }).catch(error => {
+                console.log(error.response.data)
+            })
+    })
+
     // state ticket
     const ticket = reactive({
       concert_id: '',
+      user_id: '',
       class: '',
       price: '',
       book_date: ''
@@ -110,14 +151,14 @@ export default {
     // method store
     function store () {
       const concert_id = ticket.concert_id
-      const customer_id = 2
+      const user_id = ticket.user_id
       const ticket_class = ticket.class
       const price = ticket.price
       const book_date = ticket.book_date
 
       axios.post('http://localhost:8000/api/ticket', {
         concert_id: concert_id,
-        customer_id: customer_id,
+        user_id: user_id,
         class: ticket_class,
         price: price,
         book_date: book_date
@@ -135,6 +176,7 @@ export default {
     // return
     return {
         options,
+        harga,
         concerts,
         ticket,
         validation,

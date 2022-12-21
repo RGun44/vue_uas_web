@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form @submit.prevent="register">
+        <form @submit.prevent="store">
             <h2 class="mb-3">Register</h2>
             <div class="form-group mb-3">
                 <label class="form-label">
@@ -26,17 +26,6 @@
                 </label>
                 <input type="text" class="form-control" v-model="user.email" placeholder="Email @">
             </div>
-            <div class="form-group mb-3">
-                <label class="form-label">
-                    Photo
-                </label>
-                <input class="form-control" type="file" @change="onFile" />
-                <div v-if="validation.foto" class="mt-2 alert alert-danger">
-                    {{
-                    validation.foto[0]
-                    }}
-                </div>
-            </div>
             <router-link :to="{ name: 'loginPage' }" class="btn btn-primary">Register</router-link>
         </form>
     </div>
@@ -56,7 +45,6 @@ export default {
             password: '',
             name: '',
             email: '',
-            foto: '',
         })
 
         // state validation
@@ -65,19 +53,17 @@ export default {
         const router = useRouter()
 
         // method register
-        function register() {
+        function store() {
             const username = user.username
             const password = user.password
             const name = user.name
             const email = user.email
-            const foto = user.foto
 
-            axios.post('http://localhost:8000/api/register', {
+            axios.post('http://localhost:8000/api/customer', {
                 username: username,
                 password: password,
                 name: name,
                 email: email,
-                foto: foto,
             }).then(() => {
                 // redirect ke post index
                 router.push({
@@ -94,19 +80,8 @@ export default {
             user,
             validation,
             router,
-            register,
+            store,
         }
     },
-
-    methods: {
-        onFile(e) {
-            const files = e.target.files
-            if (!files.length) return
-
-            const reader = new FileReader()
-            reader.readAsDataURL(files[0])
-            reader.onload = () => (this.user.foto = reader.result)
-        }
-    }
 }
 </script>

@@ -22,6 +22,9 @@
                         <li class="nav-item">
                             <router-link :to="{ name: 'ticket.index' }" class="nav-link">Ticket</router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'customer.index' }" class="nav-link">Customer</router-link>
+                        </li>
                     </ul>
                 </div>
             </nav>

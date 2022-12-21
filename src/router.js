@@ -71,6 +71,24 @@ const routes = [
         name: 'ticket.edit',
         component: () =>
           import('@/views/Ticket/updatePage.vue')
+      },
+      {
+        path: '/customer',
+        name: 'customer.index',
+        component: () =>
+          import('@/views/Customer/indexPage.vue')
+      },
+      {
+        path: '/customer/create',
+        name: 'customer.create',
+        component: () =>
+          import('@/views/Customer/createPage.vue')
+      },
+      {
+        path: '/customer/edit/:id',
+        name: 'customer.edit',
+        component: () =>
+          import('@/views/Customer/updatePage.vue')
       }
     ]
   },
