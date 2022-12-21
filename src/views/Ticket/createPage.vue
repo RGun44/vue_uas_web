@@ -25,24 +25,14 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">
-                                    ID Customer
-                                </label>
-                                <select v-model="ticket.customer_id" class="form-select">
-                                    <option selected disabled value="">Choose Customer</option>
-                                    <option v-for="(customer,id) in customers" :value="customer.id" :key="id">{{ customer.id }} - {{
-                                        customer.name }}</option>
-                                </select>
-                                <div v-if="validation.customer_id" class="mt-2 alert alert-danger">
-                                    {{
-                                    validation.customer_id[0]
-                                    }}
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label">
                                     Class
                                 </label>
-                                <input type="text" class="form-control" v-model="ticket.class" placeholder="Masukkan class ticket">
+                                <select v-model="ticket.class" class="form-select">
+                                    <option selected disabled value="">Pilih Kelas</option>
+                                    <option v-for="(option,id) in options" :value="option.values" :key="id">
+                                        {{ option.text }}
+                                    </option>
+                                </select>
                                 <div v-if="validation.class" class="mt-2 alert alert-danger">
                                     {{
                                     validation.class[0]
@@ -53,12 +43,7 @@
                                 <label class="form-label">
                                     Price
                                 </label>
-                                <input type="number" class="form-control" v-model="ticket.price" placeholder="Masukkan price">
-                                <div v-if="validation.price" class="mt-2 alert alert-danger">
-                                    {{
-                                    validation.name[0]
-                                    }}
-                                </div>
+                                <input type="number" class="form-control" v-model="ticket.price" placeholder="Masukkan harga tiket">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">
@@ -82,16 +67,36 @@
 
 <script>
 /* eslint-disable camelcase */
-import { reactive, ref } from 'vue'
+import { onMounted,reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 export default {
   setup () {
+
+    const options = [
+        { id: 0, value: 'reguler', text: 'Reguler' },
+        { id: 1, value: 'premium', text: 'Premium' },
+        { id: 2, value: 'eksklusif', text: 'Eksklusif' },
+    ]
+
+    let concerts = ref([])
+
+    //mounted     
+    onMounted(() => {
+        //get API from Laravel Backend      
+        axios.get('http://localhost:8000/api/concert')
+            .then(response => {
+                //assign state posts with response data           
+                concerts.value = response.data.data
+            }).catch(error => {
+                console.log(error.response.data)
+            })
+    })
+
     // state ticket
     const ticket = reactive({
       concert_id: '',
-      customer_id: '',
       class: '',
       price: '',
       book_date: ''
@@ -105,7 +110,7 @@ export default {
     // method store
     function store () {
       const concert_id = ticket.concert_id
-      const customer_id = ticket.customer_id
+      const customer_id = 2
       const ticket_class = ticket.class
       const price = ticket.price
       const book_date = ticket.book_date
@@ -129,10 +134,12 @@ export default {
 
     // return
     return {
-      ticket,
-      validation,
-      router,
-      store
+        options,
+        concerts,
+        ticket,
+        validation,
+        router,
+        store
     }
   }
 }

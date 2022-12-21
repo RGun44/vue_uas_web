@@ -28,7 +28,7 @@
                 <!-- Sidebar -->
                 <div class="col-10">
                     <main class="page-content">
-                    
+                        
                     </main>
                 </div>
 
@@ -39,7 +39,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Harga Mulai Dari :</h5>
                                 <p class="card-text">Rp 150.000</p>
-                                <router-link :to="{ name: 'ticket.create' }" class="btn btn-md btn-success">Pesan Tiket</router-link>
+                                <router-link :to="{ name: 'ticket.create', params: { id: 1 } }" class="btn btn-md btn-success">Pesan Tiket</router-link>
                             </div>
                         </div>
                     </div>

@@ -9,8 +9,6 @@
             <div class="col-md-12">
                 <div class="card border-0 rounded shadow">
                     <div class="card-body">
-                        <router-link :to="{ name: 'ticket.create' }"
-                        class="btn btn-md btn-success">TAMBAH TICKET</router-link>
 
                         <table class="table table-striped table-bordered mt-4">
                             <thead class="thead-dark">

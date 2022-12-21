@@ -19,24 +19,10 @@
                 <!-- Sidebar -->
                 <div class="col-2">
                     <aside class="page-sidebar box">
-                        <h3 class="heading">Search streamers</h3>
-                        <input type="search" class="form-control" placeholder="e.g. freeCodeCamp" role="searchbox" v-model="filter">
+                        <h3 class="heading">Search Band</h3>
+                        <input type="search" class="form-control" placeholder="e.g. Slank" role="searchbox" v-model="filter">
                         
                         <br>
-
-                        <h3 class="heading">Filter by activity</h3>
-                        <div class="checkbox">
-                            <input type="radio" name="type" id="all" value="all" checked v-model="option">
-                            <label for="all" class="state">All</label>
-                        </div>
-                        <div class="checkbox">
-                            <input type="radio" name="type" id="streaming" value="streaming" v-model="option">
-                            <label for="streaming" class="state">Streaming</label>
-                        </div>
-                        <div class="checkbox">
-                            <input type="radio" name="type" id="offline" value="offline" v-model="option">
-                            <label for="offline" class="state">Offline</label>
-                        </div>
                     </aside>
                 </div>
 
@@ -92,10 +78,12 @@ export default {
     setup(){
         const option = null
         const filter = null
+        const range = 50
 
         return{
             option,
             filter,
+            range,
         }
     }
 }
