@@ -3,18 +3,26 @@
         <form @submit.prevent="">
             <h2 class="mb-3">Register</h2>
             <div class="input">
-                <label for="email">Email address</label>
-                <input class="form-control" type="text" name="email" placeholder="email@adress.com" />
+                <label for="username">Username</label>
+                <input class="form-control" type="text" name="username" placeholder="username123" />
             </div>
             <div class="input">
                 <label for="password">Password</label>
                 <input class="form-control" type="password" name="password" placeholder="password123" />
             </div>
-            <router-link :to="{ name: 'loginPage' }" class="btn mt-4 btn-pers">Register</router-link>
-            <div class="alert alert-warning alert-dismissible fade show mt-5 d-none" role="alert" id="alert_1">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="input">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" name="name" placeholder="John Smith" />
             </div>
+            <div class="input">
+                <label for="email">Email address</label>
+                <input class="form-control" type="text" name="email" placeholder="email@adress.com" />
+            </div>
+            <div class="input">
+                <label for="photo">Photo</label>
+                <input class="form-control" type="file" name="photo" />
+            </div>
+            <router-link :to="{ name: 'loginPage' }" class="btn btn-primary">Register</router-link>
         </form>
     </div>
 </template>

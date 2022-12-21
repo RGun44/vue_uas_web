@@ -10,12 +10,8 @@
                 <label for="password">Password</label>
                 <input class="form-control" type="password" name="password" placeholder="password123" />
             </div>
-            <router-link :to="{ name: 'registerPage' }" class="alternative-option mt-4">You don't have an account?</router-link>
-            <router-link :to="{ name: 'landingPage' , params: { id: 1 } }" class="btn mt-4 btn-pers">Login</router-link>
-            <div class="alert alert-warning alert-dismissible fade show mt-5 d-none" role="alert" id="alert_1">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <p>You don't have an account? <span><router-link :to="{ name: 'registerPage' }" class="alternative-option mt-4">Register</router-link></span></p>
+            <router-link :to="{ name: 'landingPage' , params: { id: 1 } }" class="btn btn-primary">Login</router-link>
         </form>
     </div>
 </template>

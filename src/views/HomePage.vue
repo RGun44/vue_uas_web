@@ -78,12 +78,10 @@ export default {
     setup(){
         const option = null
         const filter = null
-        const range = 50
 
         return{
             option,
             filter,
-            range,
         }
     }
 }
